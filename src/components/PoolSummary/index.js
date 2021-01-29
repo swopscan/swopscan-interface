@@ -276,10 +276,11 @@ function PoolSummary({pool}) {
           </div>
         </PairPrices>
 
-        <InfoWrapper>
+        {/*<InfoWrapper>
           <InfoTitle>providing wallets</InfoTitle> 
           <Info>{pairPoolProviderWallets.length}</Info>
-        </InfoWrapper>
+        </InfoWrapper>*/}
+        
         <InfoWrapper>
           <InfoTitle>{pairPoolData.firstOfPair.toLowerCase()}</InfoTitle>
           <Info>

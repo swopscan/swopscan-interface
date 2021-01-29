@@ -262,8 +262,8 @@ function usePoolDataFetch() {
             });
             poolAttendancesWithDecimals[poolAttendancePair].sort(sorterByBalances);
           });
-        //add uniqueWallets length at the end ->
-        poolAttendancesWithDecimals.uniqueWallets = uniqueWallets.length;
+        //add nonStaking uniqueWallets at the end ->
+        poolAttendancesWithDecimals.uniqueWallets = uniqueWallets;
 
         return poolAttendancesWithDecimals;
 
@@ -273,10 +273,41 @@ function usePoolDataFetch() {
     }
     const liquidityProviderWalletFetches = fetchLiquidityProviderWallets();
 
+    //
+
+    async function fetchStakingWallets() {
+      try {
+        const response = await fetch(`${nodeURL}/addresses/data/3P73HDkPqG15nLXevjCbmXtazHYTZbpPoPw`);
+        if(!response.ok) throw new Error('Unknown but certainly caught error!');
+        const data = await response.json();
+        const stakers = data.map(obj => {
+          return obj.key.slice(36, 71);
+        });
+        return stakers;
+      } catch(error) {
+        dispatch({type: 'ERROR'});
+      }
+    }
+    const stakingWalletsFetches = fetchStakingWallets();
+
+    function calculateUniqueWallets(nonStakingWallets, stakingWallets) {
+      let wallets = [...nonStakingWallets, ...stakingWallets];
+      let uniqueWallets = [];
+      wallets.forEach(wallet => {
+        if(!uniqueWallets.includes(wallet)) {
+          uniqueWallets.push(wallet);
+        }
+      });
+      return uniqueWallets.length - 1;
+    }
+
     //COMBINING DATA
-    Promise.all([poolDataFetches, poolPairPriceFetches, fetchedPoolAssetBalance, liquidityProviderWalletFetches])
-      .then(([poolData, poolPairPrices, poolAssetBalances, liquidityProviderWallets]) => {
-        
+    Promise.all([poolDataFetches, poolPairPriceFetches, fetchedPoolAssetBalance, liquidityProviderWalletFetches, stakingWalletsFetches])
+      .then(([poolData, poolPairPrices, poolAssetBalances, liquidityProviderWallets, stakingWallets]) => {
+
+        //calculate unique wallets
+        liquidityProviderWallets.uniqueWallets = calculateUniqueWallets(liquidityProviderWallets.uniqueWallets, stakingWallets);
+
         //merge pool data and pool pair prices
         const mergedPoolDataAndPairPrices = [];
         poolData.forEach((eachPoolData, idx) => {
