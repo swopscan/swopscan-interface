@@ -10,5 +10,6 @@ import wct from './wct.svg';
 import west from './west.svg';
 import eurn from './eurn.svg';
 import usdlp from './usdlp.svg';
+import swop from './swop.svg';
 
-export { swopscan, loading, trophy, usdn, waves, btc, usdt, nsbt, wct, west, eurn, usdlp };
+export { swopscan, loading, trophy, usdn, waves, btc, usdt, nsbt, wct, west, eurn, usdlp, swop };

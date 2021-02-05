@@ -1,6 +1,7 @@
 export const nodeURL = 'https://nodes.wavesnodes.com';
 
 export const poolAssets = {
+  ['SWOP - USDN']: {address: 'ESg4EvZaY74xe3p2dxHeXpV3RNeJd7fda4aN9RtL4bzn', decimals: 7, name: 'sSWOP_USD-N'},
   ['WAVES - USDN']: {address: 'Btw3G1j4wQgdp49PTxaFkNvn75dQtqGDM7ejQppHnWC1', decimals: 7, name: 'sWAVES_USD-N'},
   ['BTC - USDN']: {address: '58RNQJqLQ3tYYpkjuJujWzLzMX3nzpGn6bTC8LfLtgAM', decimals: 7, name: 'sWBTC_USD-N'},
   ['WAVES - BTC']: {address: '2DiiWi3RLuTYBj81iwACCSayD9d1aY2ucfoJUBDHiqH8', decimals: 8, name: 'sWAVES_WBTC'},
@@ -13,6 +14,15 @@ export const poolAssets = {
 };
 
 export const pools = {
+  ['SWOP - USDN']: {
+    poolAddress: '3P27S9V36kw2McjWRZ37AxTx8iwkd7HXw6W', 
+    firstOfPair: 'SWOP', 
+    secondOfPair: 'USDN', 
+    firstOfPairAddress: 'Ehie5xYpeN8op1Cctc6aGUrqx8jq3jtf1DSjXDbfm7aT', 
+    secondOfPairAddress: 'DG2xFkPdDwKUoBkzGAhQtLpSGzfXLiCYPEzeKH2Ad24p', 
+    decimalsOfFirstPair: 8, 
+    decimalsOfSecondPair: 6
+  },
   ['WAVES - USDN']: {
     poolAddress: '3PHaNgomBkrvEL2QnuJarQVJa71wjw9qiqG', 
     firstOfPair: 'WAVES', 
