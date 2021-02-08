@@ -71,7 +71,7 @@ function usePoolDataFetch() {
 
           //using this API: "https://nodes.wavesnodes.com/api-docs/index.html#/addresses/getDataItem_1"
           ...stakedAssets.names.map(stakedAsset => {
-            return firstOfPair == 'SWOP' ? undefined : (stakedAsset == firstOfPair || stakedAsset == secondOfPair) ?
+            return (stakedAsset == firstOfPair || stakedAsset == secondOfPair) ?
               fetch(`${stakedAssets[stakedAsset].address}_${poolAddress}`)
                 .then(fetchSuccessHandler) : 
                 undefined
