@@ -1,17 +1,17 @@
 export const nodeURL = 'https://nodes.wavesnodes.com';
 
 export const poolAssets = {
-  ['SWOP - USDN']: {address: 'ESg4EvZaY74xe3p2dxHeXpV3RNeJd7fda4aN9RtL4bzn', decimals: 7, name: 'sSWOP_USD-N'},
-  ['WAVES - USDN']: {address: 'Btw3G1j4wQgdp49PTxaFkNvn75dQtqGDM7ejQppHnWC1', decimals: 7, name: 'sWAVES_USD-N'},
-  ['BTC - USDN']: {address: '58RNQJqLQ3tYYpkjuJujWzLzMX3nzpGn6bTC8LfLtgAM', decimals: 7, name: 'sWBTC_USD-N'},
-  ['WAVES - BTC']: {address: '2DiiWi3RLuTYBj81iwACCSayD9d1aY2ucfoJUBDHiqH8', decimals: 8, name: 'sWAVES_WBTC'},
-  ['USDT - USDN']: {address: 'BNQ8bxyiWvfHzHAtNyfc6E7v3sSHXKq8yuit6Fnz1A3Q', decimals: 6, name: 'sUSDT_USD-N'},
-  ['NSBT - USDN']: {address: 'HWFcdC9wjPJY1udkR2UsfXzyPptzBb9m6df8qUW6LNLo', decimals: 6, name: 'sNSBT_USD-N'},
-  ['WCT - USDN']: {address: 'AAmQ1M3pG9fP882RJdfeaoLbRtzBuwPmsximGhPXVQXN', decimals: 4, name: 'sWavesCo_USD-N'},
-  ['WEST - USDN']: {address: '8g1Ki9cvjjhLUTyNwd4MaZ4fNfNTVc92Cb6f8My4qb1A', decimals: 7, name: 'sWEST_USD-N'},
-  ['WAVES - EURN']: {address: 'Bz9HaLundrPQU1ibVkQt82rYnfQHXKwp6Ts9EXRLyyPk', decimals: 7, name: 'sWAVES_EURN'},
-  ['USDLP - USDN']: {address: '9Pm2c97VzGSK6p8XGMCFABs575K9Cb35GdKtzwVA59m9', decimals: 6, name: 'sUSDLP_USD-N'},
-  ['ETH - USDN']: {address: 'H8wRVSgq82j6YU1K7jXVpDXHpd5m91t3bmCzRR7uFGc7', decimals: 7, name: 'sWETH_USD-N'}
+  ['SWOP - USDN']: {address: 'ESg4EvZaY74xe3p2dxHeXpV3RNeJd7fda4aN9RtL4bzn', decimals: 7, name: 'sSWOP_USD-N', pool: '3P27S9V36kw2McjWRZ37AxTx8iwkd7HXw6W'},
+  ['WAVES - USDN']: {address: 'Btw3G1j4wQgdp49PTxaFkNvn75dQtqGDM7ejQppHnWC1', decimals: 7, name: 'sWAVES_USD-N', pool: '3PHaNgomBkrvEL2QnuJarQVJa71wjw9qiqG'},
+  ['BTC - USDN']: {address: '58RNQJqLQ3tYYpkjuJujWzLzMX3nzpGn6bTC8LfLtgAM', decimals: 7, name: 'sWBTC_USD-N', pool: '3PACj2DLTw3uUhsUmT98zHU5M4hPufbHKav'},
+  ['WAVES - BTC']: {address: '2DiiWi3RLuTYBj81iwACCSayD9d1aY2ucfoJUBDHiqH8', decimals: 8, name: 'sWAVES_WBTC', pool: '3P8FVZgAJUAq32UEZtTw84qS4zLqEREiEiP'},
+  ['USDT - USDN']: {address: 'BNQ8bxyiWvfHzHAtNyfc6E7v3sSHXKq8yuit6Fnz1A3Q', decimals: 6, name: 'sUSDT_USD-N', pool: '3PPH7x7iqobW5ziyiRCic19rQqKr6nPYaK1'},
+  ['NSBT - USDN']: {address: 'HWFcdC9wjPJY1udkR2UsfXzyPptzBb9m6df8qUW6LNLo', decimals: 6, name: 'sNSBT_USD-N', pool: '3P2V63Xd6BviDkeMzxhUw2SJyojByRz8a8m'},
+  ['WCT - USDN']: {address: 'AAmQ1M3pG9fP882RJdfeaoLbRtzBuwPmsximGhPXVQXN', decimals: 4, name: 'sWavesCo_USD-N', pool: '3PMDFxmG9uXAbuQgiNogZCBQASvCHt1Mdar'},
+  ['WEST - USDN']: {address: '8g1Ki9cvjjhLUTyNwd4MaZ4fNfNTVc92Cb6f8My4qb1A', decimals: 7, name: 'sWEST_USD-N', pool: '3P6DLdJTP2EySq9MFdJu6beUevrQd2sVVBh'},
+  ['WAVES - EURN']: {address: 'Bz9HaLundrPQU1ibVkQt82rYnfQHXKwp6Ts9EXRLyyPk', decimals: 7, name: 'sWAVES_EURN', pool: '3PK7Xe5BiedRyxHLuMQx5ey9riUQqvUths2'},
+  ['USDLP - USDN']: {address: '9Pm2c97VzGSK6p8XGMCFABs575K9Cb35GdKtzwVA59m9', decimals: 6, name: 'sUSDLP_USD-N', pool: '3PDWi8hjQJjXhyTpeaiEYfFKWBd1iC4udfF'},
+  ['ETH - USDN']: {address: 'H8wRVSgq82j6YU1K7jXVpDXHpd5m91t3bmCzRR7uFGc7', decimals: 7, name: 'sWETH_USD-N', pool: '3PNEC4YKqZiMMytFrYRVtpW2ujvi3aGXRPm'}
 };
 
 export const pools = {

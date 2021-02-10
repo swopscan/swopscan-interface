@@ -163,7 +163,7 @@ function WalletPoolDetail({pair, totalQuantity, walletBalance, decimals, walletA
                 <StyledData><p>{refactorNumber((totalQuantity)/(10**decimals))}</p> <p>total issued</p></StyledData>
                 <StyledData><p>{refactorNumber((walletBalance)/(10**decimals))}</p> <p>wallet balance</p></StyledData>
                 <StyledData><p>{((walletBalance / totalQuantity)*100).toFixed(4)}% </p><p>wallet share</p></StyledData>
-                <StyledData><p>{walletRankFinder(pair) == 1 ? <img src={trophy} alt="trophy" width="16px" height="16px" /> : null} {walletRankFinder(pair)} </p><p>rank</p></StyledData>
+                {/*with stable version -> <StyledData><p>{walletRankFinder(pair) == 1 ? <img src={trophy} alt="trophy" width="16px" height="16px" /> : null} {walletRankFinder(pair)} </p><p>rank</p></StyledData>*/}
                 <StyledData><p>{refactorNumber(walletValue.firstOfPair)}</p> <p>{pairPoolData.firstOfPair.toLowerCase()}</p></StyledData>
                 <StyledData><p>{refactorNumber(walletValue.secondOfPair)} </p> <p>{pairPoolData.secondOfPair.toLowerCase()}</p></StyledData>
               </DataWrapper>

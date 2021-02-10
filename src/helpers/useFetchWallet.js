@@ -49,13 +49,37 @@ function useFetchWallet(walletAddress) {
       }
     }
     const fetchedTotalBalances = fetchTotalBalance(concatenatedPoolAssetsAPIUrl).catch(errorCatcher);
+
+  
+    //using this API: "https://nodes.wavesnodes.com/api-docs/index.html#/addresses/getData_1"
+    async function fetchStakedAssets() {
+      const response = await fetch(`${nodeURL}/addresses/data/3P73HDkPqG15nLXevjCbmXtazHYTZbpPoPw?matches=.%2A${walletAddress}.%2A`);
+      const data = await response.json();
+      const stakedAssets = {};
+      for(let i = 0; i < data.length; i++) {
+        if(data[i].key.includes('share_tokens_locked')) {
+          const pool = data[i].key.slice(0, 35);
+          const poolAssetName = Object.values(poolAssets).find(poolAsset => poolAsset.pool == pool).name;
+          const balance = data[i].value;
+          stakedAssets[poolAssetName] = balance;
+        }
+      }
+      return stakedAssets;
+    }
+    const fetchedStakedAssets = fetchStakedAssets();
+
   
     //Combining wallet pool tokens and total issued pool tokens.
-    Promise.all([fetchedWalletBalances, fetchedTotalBalances])
-      .then(([walletBalances, totalBalances]) => {
+    Promise.all([fetchedWalletBalances, fetchedTotalBalances, fetchedStakedAssets])
+      .then(([walletBalances, totalBalances, stakedAssets]) => {
         const walletAndTotalPoolAsset = [];
         walletBalances.forEach((walletBalance, idx) => {
           walletAndTotalPoolAsset.push({...walletBalance, ...totalBalances[idx]});
+        });
+        walletAndTotalPoolAsset.forEach(assetData => {
+          if(Object.keys(stakedAssets).includes(assetData.name)) {
+            assetData.walletBalance = assetData.walletBalance + stakedAssets[assetData.name];
+          }
         });
         setBalances(walletAndTotalPoolAsset);
         setLoading(false);
@@ -63,7 +87,6 @@ function useFetchWallet(walletAddress) {
       .catch(errorCatcher)
 
   }, [walletAddress]);
-
   return [balances, loading, isError];
 }
 
