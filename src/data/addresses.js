@@ -10,7 +10,8 @@ export const poolAssets = {
   ['WCT - USDN']: {address: 'AAmQ1M3pG9fP882RJdfeaoLbRtzBuwPmsximGhPXVQXN', decimals: 4, name: 'sWavesCo_USD-N'},
   ['WEST - USDN']: {address: '8g1Ki9cvjjhLUTyNwd4MaZ4fNfNTVc92Cb6f8My4qb1A', decimals: 7, name: 'sWEST_USD-N'},
   ['WAVES - EURN']: {address: 'Bz9HaLundrPQU1ibVkQt82rYnfQHXKwp6Ts9EXRLyyPk', decimals: 7, name: 'sWAVES_EURN'},
-  ['USDLP - USDN']: {address: '9Pm2c97VzGSK6p8XGMCFABs575K9Cb35GdKtzwVA59m9', decimals: 6, name: 'sUSDLP_USD-N'}
+  ['USDLP - USDN']: {address: '9Pm2c97VzGSK6p8XGMCFABs575K9Cb35GdKtzwVA59m9', decimals: 6, name: 'sUSDLP_USD-N'},
+  ['ETH - USDN']: {address: 'H8wRVSgq82j6YU1K7jXVpDXHpd5m91t3bmCzRR7uFGc7', decimals: 7, name: 'sWETH_USD-N'}
 };
 
 export const pools = {
@@ -102,6 +103,15 @@ export const pools = {
     firstOfPairAddress: '9AT2kEi8C4AYxV1qKxtQTVpD5i54jCPvaNNRP6VzRtYZ', 
     secondOfPairAddress: 'DG2xFkPdDwKUoBkzGAhQtLpSGzfXLiCYPEzeKH2Ad24p', 
     decimalsOfFirstPair: 6, 
+    decimalsOfSecondPair: 6
+  },
+  ['ETH - USDN']: {
+    poolAddress: '3PNEC4YKqZiMMytFrYRVtpW2ujvi3aGXRPm', 
+    firstOfPair: 'ETH', 
+    secondOfPair: 'USDN', 
+    firstOfPairAddress: '474jTeYx2r2Va35794tCScAXWJG9hU2HcgxzMowaZUnu', 
+    secondOfPairAddress: 'DG2xFkPdDwKUoBkzGAhQtLpSGzfXLiCYPEzeKH2Ad24p', 
+    decimalsOfFirstPair: 8, 
     decimalsOfSecondPair: 6
   }
 }
