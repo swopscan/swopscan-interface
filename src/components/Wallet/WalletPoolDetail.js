@@ -86,7 +86,7 @@ function refactorNumber(number) {
 }
 
 
-function WalletPoolDetail({pair, totalQuantity, walletBalance, decimals, walletAddress}) {
+function WalletPoolDetail({pair, totalQuantity, walletBalance, stakedBalance, nonStakedBalance, decimals, walletAddress}) {
   const [poolData, poolProviderWallets] = useContext(PoolDataContext);
   const pairPoolData = poolData.find(pairPoolData => pairPoolData.poolPair == pair);
 
@@ -162,6 +162,8 @@ function WalletPoolDetail({pair, totalQuantity, walletBalance, decimals, walletA
               <DataWrapper>
                 <StyledData><p>{refactorNumber((totalQuantity)/(10**decimals))}</p> <p>total issued</p></StyledData>
                 <StyledData><p>{refactorNumber((walletBalance)/(10**decimals))}</p> <p>wallet balance</p></StyledData>
+                <StyledData><p>{refactorNumber((stakedBalance)/(10**decimals))}</p> <p>staked balance</p></StyledData>
+                <StyledData><p>{refactorNumber((nonStakedBalance)/(10**decimals))}</p> <p>stakeable balance</p></StyledData>
                 <StyledData><p>{((walletBalance / totalQuantity)*100).toFixed(4)}% </p><p>wallet share</p></StyledData>
                 {/*with stable version -> <StyledData><p>{walletRankFinder(pair) == 1 ? <img src={trophy} alt="trophy" width="16px" height="16px" /> : null} {walletRankFinder(pair)} </p><p>rank</p></StyledData>*/}
                 <StyledData><p>{refactorNumber(walletValue.firstOfPair)}</p> <p>{pairPoolData.firstOfPair.toLowerCase()}</p></StyledData>

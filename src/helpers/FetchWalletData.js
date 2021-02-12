@@ -4,7 +4,7 @@ import { poolAssets, nodeURL } from '../data/addresses';
 
 const concatenatedPoolAssetsAPIUrl = Object.keys(poolAssets).map(poolAssetName => poolAssets[poolAssetName].address).reduce((concatenatedURL, assetAddress) => concatenatedURL+'id='+assetAddress+'&', `${nodeURL}/assets/details?`);
 
-function useFetchWallet(walletAddress) {
+function FetchWalletData(walletAddress) {
   const [loading, setLoading] = useState(true);
   const [balances, setBalances] = useState();
   const [isError, setIsError] = useState(false);
@@ -26,7 +26,7 @@ function useFetchWallet(walletAddress) {
         const response = await fetch(url);
         if(!response.ok) throw new Error('Unknown but certainly caught error!');
         const data = await response.json();
-        return {pair, walletBalance: data.balance};
+        return {pair, walletBalance: data.balance, nonStakedBalance: data.balance, stakedBalance: 0};
       } catch(error) {
         throw new Error(error);
       }
@@ -66,21 +66,37 @@ function useFetchWallet(walletAddress) {
       }
       return stakedAssets;
     }
-    const fetchedStakedAssets = fetchStakedAssets();
+    const fetchedStakedAssets = fetchStakedAssets(); 
+
+    //using this API: "https://nodes.wavesnodes.com/api-docs/index.html#/addresses/getData_1"
+    async function fetchStakedSwop() {
+      const response = await fetch(`${nodeURL}/addresses/data/3PLHVWCqA9DJPDbadUofTohnCULLauiDWhS?matches=.%2A${walletAddress}.%2A`);
+      const data = await response.json();
+      const stakedSwop = {stakedSwop: 0};
+      for(let i = 0; i < data.length; i++) {
+        if(data[i].key == `${walletAddress}_SWOP_amount`) {
+          stakedSwop.stakedSwop = data[i].value / 10**8
+        }
+      }
+      return stakedSwop;
+    }
+    const fetchedStakedSwop = fetchStakedSwop();
 
   
     //Combining wallet pool tokens and total issued pool tokens.
-    Promise.all([fetchedWalletBalances, fetchedTotalBalances, fetchedStakedAssets])
-      .then(([walletBalances, totalBalances, stakedAssets]) => {
+    Promise.all([fetchedWalletBalances, fetchedTotalBalances, fetchedStakedAssets, fetchedStakedSwop])
+      .then(([walletBalances, totalBalances, stakedAssets, stakedSwop]) => {
         const walletAndTotalPoolAsset = [];
         walletBalances.forEach((walletBalance, idx) => {
           walletAndTotalPoolAsset.push({...walletBalance, ...totalBalances[idx]});
         });
         walletAndTotalPoolAsset.forEach(assetData => {
           if(Object.keys(stakedAssets).includes(assetData.name)) {
+            assetData.stakedBalance = stakedAssets[assetData.name];
             assetData.walletBalance = assetData.walletBalance + stakedAssets[assetData.name];
           }
         });
+        walletAndTotalPoolAsset.unshift(stakedSwop);
         setBalances(walletAndTotalPoolAsset);
         setLoading(false);
       })
@@ -91,4 +107,4 @@ function useFetchWallet(walletAddress) {
 }
 
 
-export { useFetchWallet };
+export { FetchWalletData };

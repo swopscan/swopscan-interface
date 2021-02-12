@@ -10,6 +10,7 @@ const initialState = {
   poolProviderWallets: null,
   pricesInUSDN: null,
   pricesInWAVES: null,
+  stakedSwopAmount: NaN
 };
 
 function reducer(currentState, action) {
@@ -22,6 +23,7 @@ function reducer(currentState, action) {
         poolProviderWallets: action.payload.poolProviderWallets,
         pricesInUSDN: action.payload.pricesInUSDN,
         pricesInWAVES: action.payload.pricesInWAVES,
+        stakedSwopAmount: action.payload.stakedSwopAmount,
       }
     case 'ERROR':
       return {...currentState, isError: true, loading: false};
@@ -30,7 +32,7 @@ function reducer(currentState, action) {
   }
 }
 
-function usePoolDataFetch() {
+function FetchPoolData() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   //fetching pool balances in pairs and price calculation
@@ -290,6 +292,23 @@ function usePoolDataFetch() {
     }
     const stakingWalletsFetches = fetchStakingWallets();
 
+    //
+
+    async function fetchStakedSwopAmount() {
+      try {
+        const response = await fetch(`${nodeURL}/assets/balance/3PLHVWCqA9DJPDbadUofTohnCULLauiDWhS/Ehie5xYpeN8op1Cctc6aGUrqx8jq3jtf1DSjXDbfm7aT`);
+        if(!response.ok) throw new Error('Unknown but certainly caught error!');
+        const data = await response.json();
+        const stakedAmount = data.balance / 10**8;
+        return stakedAmount;
+      } catch(error) {
+        dispatch({type: 'ERROR'});
+      }
+    }
+    const stakedSwopAmountFetch = fetchStakedSwopAmount();
+
+    //
+
     function calculateUniqueWallets(nonStakingWallets, stakingWallets) {
       let wallets = [...nonStakingWallets, ...stakingWallets];
       let uniqueWallets = [];
@@ -302,8 +321,8 @@ function usePoolDataFetch() {
     }
 
     //COMBINING DATA
-    Promise.all([poolDataFetches, poolPairPriceFetches, fetchedPoolAssetBalance, liquidityProviderWalletFetches, stakingWalletsFetches])
-      .then(([poolData, poolPairPrices, poolAssetBalances, liquidityProviderWallets, stakingWallets]) => {
+    Promise.all([poolDataFetches, poolPairPriceFetches, fetchedPoolAssetBalance, liquidityProviderWalletFetches, stakingWalletsFetches, stakedSwopAmountFetch])
+      .then(([poolData, poolPairPrices, poolAssetBalances, liquidityProviderWallets, stakingWallets, stakedSwopAmount]) => {
 
         //calculate unique wallets
         liquidityProviderWallets.uniqueWallets = calculateUniqueWallets(liquidityProviderWallets.uniqueWallets, stakingWallets);
@@ -326,6 +345,7 @@ function usePoolDataFetch() {
             poolProviderWallets: liquidityProviderWallets,
             pricesInUSDN: pricesInTermsOfUSDN,
             pricesInWAVES: pricesInTermsOfWAVES,
+            stakedSwopAmount: stakedSwopAmount
           }
         });
       })
@@ -339,4 +359,4 @@ function usePoolDataFetch() {
 }
 
 
-export { usePoolDataFetch };
+export { FetchPoolData };

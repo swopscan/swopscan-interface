@@ -34,7 +34,7 @@ function Footer() {
         swopscan is not affiliated with 
         <StyledLink href="https://swop.fi" style={{marginLeft: '0.25em'}}>swop.fi</StyledLink> 
       </StyledInformation>
-      <StyledInformation>swopscan v0.5</StyledInformation>
+      <StyledInformation>swopscan v0.6</StyledInformation>
       <StyledLink href="https://github.com/swopscan">github</StyledLink>
       <StyledLink href="https://twitter.com/swopscan" style={{marginRight: 'auto'}}>twitter</StyledLink>
     </StyledFooter>

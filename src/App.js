@@ -1,6 +1,6 @@
 import { useState, createContext } from 'react';
 import styled, { css } from 'styled-components';
-import { usePoolDataFetch } from './helpers/usePoolDataFetch';
+import { FetchPoolData } from './helpers/FetchPoolData';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { SidePools } from './components/SidePools';
@@ -54,10 +54,10 @@ function App() {
 
   const [showWallet, setShowWallet] = useState(false);
 
-  const {isError, loading, poolData, poolProviderWallets, pricesInUSDN, pricesInWAVES} = usePoolDataFetch();
+  const {isError, loading, poolData, poolProviderWallets, pricesInUSDN, pricesInWAVES, stakedSwopAmount} = FetchPoolData();
 
   return (
-    <PoolDataContext.Provider value={[poolData, poolProviderWallets, pricesInUSDN, pricesInWAVES]}>
+    <PoolDataContext.Provider value={[poolData, poolProviderWallets, pricesInUSDN, pricesInWAVES, stakedSwopAmount]}>
       <Wrapper showHomeScreen={showHomeScreen}>
         <Header loading={loading} showHomeScreen={setShowHomeScreen} setShowWallet={setShowWallet} showPool={setPool} walletFormProps={{changeShowWallet: setShowWallet, changeWalletAddress: setWalletAddress, showHomeScreen: setShowHomeScreen, showPool: setPool}} />
 

@@ -85,7 +85,7 @@ const Asset = styled.div`
 
 
 function HomeScreen() {
-  const [poolData, poolProviderWallets, pricesInUSDN, pricesInWAVES] = useContext(PoolDataContext);
+  const [poolData, poolProviderWallets, pricesInUSDN, pricesInWAVES, stakedSwopAmount] = useContext(PoolDataContext);
 
   function calculateProvidedLiquidity() {
     let liquidityInUSDN = 0;
@@ -136,7 +136,7 @@ function HomeScreen() {
         total = totalStaked + pairPoolData.secondOfPairBalance;
       }
     });
-    return {total, totalStaked: totalStaked.toLocaleString('en-US', {maximumFractionDigits: 4})};
+    return {total, totalStaked: totalStaked.toLocaleString('en-US', {minimumFractionDigits: 4, maximumFractionDigits: 4})};
   }
   let { total: totalUSDN, totalStaked: totalStakedUSDN} = calculateStakedAssets('USDN');
   let { total: totalEURN, totalStaked: totalStakedEURN} = calculateStakedAssets('EURN');
@@ -190,6 +190,10 @@ function HomeScreen() {
         <StyledInfo>
           <Info />
           {uniqueWallets} wallets are providing liquidity.
+        </StyledInfo>
+        <StyledInfo>
+          <Info />
+          {stakedSwopAmount.toLocaleString('en-US', {minimumFractionDigits: 4, maximumFractionDigits: 4})} SWOP is being staked in governance.
         </StyledInfo>
         <StyledInfo>
           <Info />
