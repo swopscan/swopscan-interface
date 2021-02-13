@@ -236,10 +236,73 @@ function FetchPoolData() {
             dispatch({type: 'ERROR'});
           }
         }
+
+        async function fetchStakedWallets() {
+          try {
+            const response = await fetch(`${nodeURL}/addresses/data/3P73HDkPqG15nLXevjCbmXtazHYTZbpPoPw`);
+            const stakedWallets = await response.json();
+
+            const poolAddresses = {};
+            Object.keys(pools).forEach(pool => {
+              poolAddresses[pools[pool].poolAddress] = pool;
+            });
+
+            const stakedWalletAmount = {};
+
+            stakedWallets.forEach(stakedWallet => {
+              if(!stakedWallet.key.includes('share_tokens_locked')) return;
+              const pool = stakedWallet.key.slice(0, 35);
+              const poolAssetName = poolAddresses[pool];
+              const balance = stakedWallet.value;
+              const wallet = stakedWallet.key.slice(36, 71);
+              if(stakedWalletAmount[poolAssetName] == undefined) {
+                stakedWalletAmount[poolAssetName] = {};
+              }
+              if(!Object.is(balance, 0) && wallet != 'total_share_tokens_locked') {
+                stakedWalletAmount[poolAssetName][wallet] = balance;
+              }
+            });
+            return Object.keys(stakedWalletAmount).map(stakedWalletPool => {
+              return {[stakedWalletPool]: stakedWalletAmount[stakedWalletPool]};
+            });
+          } catch(error) {
+            dispatch({type: 'ERROR'});
+          }
+        }
         
-        const allWallets = await Promise.all([
+        const [nonStakedWallets, stakedWallets] = await Promise.all([
+          Promise.all([
           ...Object.keys(poolAssets).map(poolAssetName => fetchWalletsOfEachAsset(poolAssetName, poolAssets[poolAssetName].address, 999))
+          ]),
+          fetchStakedWallets()
         ]);
+
+        const allWalletsObject = {};
+        const stakedWalletsObject = {};
+        stakedWallets.forEach(stakedWallet => {
+          stakedWalletsObject[Object.keys(stakedWallet)[0]] = stakedWallet[Object.keys(stakedWallet)[0]];
+        });
+        const nonStakedWalletsObject = {};
+        nonStakedWallets.forEach(nonStakedWallet => {
+          nonStakedWalletsObject[Object.keys(nonStakedWallet)[0]] = nonStakedWallet[Object.keys(nonStakedWallet)[0]];
+        });
+
+        Object.keys(pools).forEach(pool => {
+          const stakingWallets = Object.keys(stakedWalletsObject[pool]);
+          const nonStakingWallets = Object.keys(nonStakedWalletsObject[pool]);
+          allWalletsObject[pool] = {...nonStakedWalletsObject[pool]};
+          stakingWallets.forEach(stakingWallet => {
+            if(nonStakingWallets.includes(stakingWallet)) {
+              allWalletsObject[pool][stakingWallet] = allWalletsObject[pool][stakingWallet] + stakedWalletsObject[pool][stakingWallet];
+            } else {
+              allWalletsObject[pool][stakingWallet] = stakedWalletsObject[pool][stakingWallet];
+            }
+          });
+        });
+        const allWallets = Object.keys(allWalletsObject).map(pool => {
+          delete allWalletsObject[pool]['3P73HDkPqG15nLXevjCbmXtazHYTZbpPoPw'];
+          return {[pool]: allWalletsObject[pool]};
+        });
 
         for(let i = 0; i < allWallets.length; i++) {
           poolAttendances = {...poolAttendances, ...allWallets[i]}
@@ -264,8 +327,8 @@ function FetchPoolData() {
             });
             poolAttendancesWithDecimals[poolAttendancePair].sort(sorterByBalances);
           });
-        //add nonStaking uniqueWallets at the end ->
-        poolAttendancesWithDecimals.uniqueWallets = uniqueWallets;
+        //add uniqueWallets at the end ->
+        poolAttendancesWithDecimals.uniqueWallets = uniqueWallets.length;
 
         return poolAttendancesWithDecimals;
 
@@ -274,23 +337,6 @@ function FetchPoolData() {
       }
     }
     const liquidityProviderWalletFetches = fetchLiquidityProviderWallets();
-
-    //
-
-    async function fetchStakingWallets() {
-      try {
-        const response = await fetch(`${nodeURL}/addresses/data/3P73HDkPqG15nLXevjCbmXtazHYTZbpPoPw`);
-        if(!response.ok) throw new Error('Unknown but certainly caught error!');
-        const data = await response.json();
-        const stakers = data.map(obj => {
-          return obj.key.slice(36, 71);
-        });
-        return stakers;
-      } catch(error) {
-        dispatch({type: 'ERROR'});
-      }
-    }
-    const stakingWalletsFetches = fetchStakingWallets();
 
     //
 
@@ -307,25 +353,9 @@ function FetchPoolData() {
     }
     const stakedSwopAmountFetch = fetchStakedSwopAmount();
 
-    //
-
-    function calculateUniqueWallets(nonStakingWallets, stakingWallets) {
-      let wallets = [...nonStakingWallets, ...stakingWallets];
-      let uniqueWallets = [];
-      wallets.forEach(wallet => {
-        if(!uniqueWallets.includes(wallet)) {
-          uniqueWallets.push(wallet);
-        }
-      });
-      return uniqueWallets.length - 1;
-    }
-
     //COMBINING DATA
-    Promise.all([poolDataFetches, poolPairPriceFetches, fetchedPoolAssetBalance, liquidityProviderWalletFetches, stakingWalletsFetches, stakedSwopAmountFetch])
-      .then(([poolData, poolPairPrices, poolAssetBalances, liquidityProviderWallets, stakingWallets, stakedSwopAmount]) => {
-
-        //calculate unique wallets
-        liquidityProviderWallets.uniqueWallets = calculateUniqueWallets(liquidityProviderWallets.uniqueWallets, stakingWallets);
+    Promise.all([poolDataFetches, poolPairPriceFetches, fetchedPoolAssetBalance, liquidityProviderWalletFetches, stakedSwopAmountFetch])
+      .then(([poolData, poolPairPrices, poolAssetBalances, liquidityProviderWallets, stakedSwopAmount]) => {
 
         //merge pool data and pool pair prices
         const mergedPoolDataAndPairPrices = [];

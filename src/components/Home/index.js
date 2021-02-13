@@ -193,7 +193,7 @@ function HomeScreen() {
         </StyledInfo>
         <StyledInfo>
           <Info />
-          {stakedSwopAmount.toLocaleString('en-US', {minimumFractionDigits: 4, maximumFractionDigits: 4})} SWOP is being staked in governance.
+          {stakedSwopAmount.toLocaleString('en-US', {minimumFractionDigits: 4, maximumFractionDigits: 4})} SWOP is being staked in the governance.
         </StyledInfo>
         <StyledInfo>
           <Info />

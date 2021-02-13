@@ -44,7 +44,7 @@ function SwopDetail({stakedSwop}) {
       <TitleWrapper>
         <StyledTitle>SWOP</StyledTitle>
       </TitleWrapper>
-      <StyledData>{stakedSwop.stakedSwop} SWOP is being staked in governance.</StyledData>
+      <StyledData>{stakedSwop.stakedSwop} SWOP is being staked in the governance.</StyledData>
     </StyledWalletPoolDetail>
   );
 }

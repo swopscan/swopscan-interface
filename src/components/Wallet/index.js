@@ -11,7 +11,7 @@ function Wallet({walletAddress}) {
   const [showProvided, setShowProvided] = useState(true);
 
   const [balances, loading, isError] = FetchWalletData(walletAddress);
-
+  
   return (
     <main style={{gridArea: "content"}}>
       {
@@ -22,7 +22,7 @@ function Wallet({walletAddress}) {
             (
               <>
                 <WalletOptions showProvided={showProvided} setShowProvided={setShowProvided} />              
-                <SwopDetail stakedSwop={balances[0]} />              
+                {Object.is(balances[0].stakedSwop, 0) ? null : <SwopDetail stakedSwop={balances[0]} /> }             
                 {balances.slice(1).map((balance) => (
                   (Object.is(balance.walletBalance, 0) && showProvided) ? 
                     null : 

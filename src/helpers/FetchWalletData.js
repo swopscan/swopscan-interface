@@ -53,34 +53,42 @@ function FetchWalletData(walletAddress) {
   
     //using this API: "https://nodes.wavesnodes.com/api-docs/index.html#/addresses/getData_1"
     async function fetchStakedAssets() {
-      const response = await fetch(`${nodeURL}/addresses/data/3P73HDkPqG15nLXevjCbmXtazHYTZbpPoPw?matches=.%2A${walletAddress}.%2A`);
-      const data = await response.json();
-      const stakedAssets = {};
-      for(let i = 0; i < data.length; i++) {
-        if(data[i].key.includes('share_tokens_locked')) {
-          const pool = data[i].key.slice(0, 35);
-          const poolAssetName = Object.values(poolAssets).find(poolAsset => poolAsset.pool == pool).name;
-          const balance = data[i].value;
-          stakedAssets[poolAssetName] = balance;
+      try {
+        const response = await fetch(`${nodeURL}/addresses/data/3P73HDkPqG15nLXevjCbmXtazHYTZbpPoPw?matches=.%2A${walletAddress}.%2A`);
+        const data = await response.json();
+        const stakedAssets = {};
+        for(let i = 0; i < data.length; i++) {
+          if(data[i].key.includes('share_tokens_locked')) {
+            const pool = data[i].key.slice(0, 35);
+            const poolAssetName = Object.values(poolAssets).find(poolAsset => poolAsset.pool == pool).name;
+            const balance = data[i].value;
+            stakedAssets[poolAssetName] = balance;
+          }
         }
+        return stakedAssets;
+      } catch(error) {
+        throw new Error(error);
       }
-      return stakedAssets;
     }
-    const fetchedStakedAssets = fetchStakedAssets(); 
+    const fetchedStakedAssets = fetchStakedAssets().catch(errorCatcher); 
 
     //using this API: "https://nodes.wavesnodes.com/api-docs/index.html#/addresses/getData_1"
     async function fetchStakedSwop() {
-      const response = await fetch(`${nodeURL}/addresses/data/3PLHVWCqA9DJPDbadUofTohnCULLauiDWhS?matches=.%2A${walletAddress}.%2A`);
-      const data = await response.json();
-      const stakedSwop = {stakedSwop: 0};
-      for(let i = 0; i < data.length; i++) {
-        if(data[i].key == `${walletAddress}_SWOP_amount`) {
-          stakedSwop.stakedSwop = data[i].value / 10**8
+      try {
+        const response = await fetch(`${nodeURL}/addresses/data/3PLHVWCqA9DJPDbadUofTohnCULLauiDWhS?matches=.%2A${walletAddress}.%2A`);
+        const data = await response.json();
+        const stakedSwop = {stakedSwop: 0};
+        for(let i = 0; i < data.length; i++) {
+          if(data[i].key == `${walletAddress}_SWOP_amount`) {
+            stakedSwop.stakedSwop = data[i].value / 10**8
+          }
         }
+        return stakedSwop;
+      } catch(error) {
+        throw new Error(error);
       }
-      return stakedSwop;
     }
-    const fetchedStakedSwop = fetchStakedSwop();
+    const fetchedStakedSwop = fetchStakedSwop().catch(errorCatcher);
 
   
     //Combining wallet pool tokens and total issued pool tokens.
