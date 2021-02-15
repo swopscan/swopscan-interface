@@ -64,7 +64,9 @@ function App() {
         {
           (loading) ?
             null :
-            <SidePools showHomeScreen={setShowHomeScreen} showWallet={setShowWallet} pool={pool} choosePool={setPool} />
+            (isError) ?
+              <div style={{gridArea: 'pools'}}></div> :
+              <SidePools showHomeScreen={setShowHomeScreen} showWallet={setShowWallet} pool={pool} choosePool={setPool} />
         }
 
         {
