@@ -4,6 +4,7 @@ export const poolAssets = {
   ['SWOP - USDN']: {address: 'ESg4EvZaY74xe3p2dxHeXpV3RNeJd7fda4aN9RtL4bzn', decimals: 7, name: 'sSWOP_USD-N', pool: '3P27S9V36kw2McjWRZ37AxTx8iwkd7HXw6W'},
   ['WAVES - USDN']: {address: 'Btw3G1j4wQgdp49PTxaFkNvn75dQtqGDM7ejQppHnWC1', decimals: 7, name: 'sWAVES_USD-N', pool: '3PHaNgomBkrvEL2QnuJarQVJa71wjw9qiqG'},
   ['BTC - USDN']: {address: '58RNQJqLQ3tYYpkjuJujWzLzMX3nzpGn6bTC8LfLtgAM', decimals: 7, name: 'sWBTC_USD-N', pool: '3PACj2DLTw3uUhsUmT98zHU5M4hPufbHKav'},
+  ['USDC - USDN']: {address: '6en9RSUmqsh5j9sYeWYUvPM2r8QXVcwscdJorgdF3uxH', decimals: 6, name: 'sUSD Coi_USD-N', pool: '3PNi1BJendWYYe2CRnqpfLoYxUZ6UTcx3LF'},
   ['USDT - USDN']: {address: 'BNQ8bxyiWvfHzHAtNyfc6E7v3sSHXKq8yuit6Fnz1A3Q', decimals: 6, name: 'sUSDT_USD-N', pool: '3PPH7x7iqobW5ziyiRCic19rQqKr6nPYaK1'},
   ['ETH - USDN']: {address: 'H8wRVSgq82j6YU1K7jXVpDXHpd5m91t3bmCzRR7uFGc7', decimals: 7, name: 'sWETH_USD-N', pool: '3PNEC4YKqZiMMytFrYRVtpW2ujvi3aGXRPm'},
   ['NSBT - USDN']: {address: 'HWFcdC9wjPJY1udkR2UsfXzyPptzBb9m6df8qUW6LNLo', decimals: 6, name: 'sNSBT_USD-N', pool: '3P2V63Xd6BviDkeMzxhUw2SJyojByRz8a8m'},
@@ -40,6 +41,15 @@ export const pools = {
     firstOfPairAddress: '8LQW8f7P5d5PZM7GtZEBgaqRPGSzS3DfPuiXrURJ4AJS', 
     secondOfPairAddress: 'DG2xFkPdDwKUoBkzGAhQtLpSGzfXLiCYPEzeKH2Ad24p', 
     decimalsOfFirstPair: 8, 
+    decimalsOfSecondPair: 6
+  },
+  ['USDC - USDN']: {
+    poolAddress: '3PNi1BJendWYYe2CRnqpfLoYxUZ6UTcx3LF', 
+    firstOfPair: 'USDC', 
+    secondOfPair: 'USDN', 
+    firstOfPairAddress: '6XtHjpXbs9RRJP2Sr9GUyVqzACcby9TkThHXnjVC5CDJ', 
+    secondOfPairAddress: 'DG2xFkPdDwKUoBkzGAhQtLpSGzfXLiCYPEzeKH2Ad24p', 
+    decimalsOfFirstPair: 6, 
     decimalsOfSecondPair: 6
   },
   ['USDT - USDN']: {

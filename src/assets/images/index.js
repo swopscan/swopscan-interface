@@ -12,5 +12,6 @@ import eurn from './eurn.svg';
 import usdlp from './usdlp.svg';
 import swop from './swop.svg';
 import eth from './eth.svg';
+import usdc from './usdc.svg';
 
-export { swopscan, loading, trophy, usdn, waves, btc, usdt, nsbt, wct, west, eurn, usdlp, swop, eth };
+export { swopscan, loading, trophy, usdn, waves, btc, usdt, nsbt, wct, west, eurn, usdlp, swop, eth, usdc };
