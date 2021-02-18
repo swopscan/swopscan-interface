@@ -125,3 +125,17 @@ export const pools = {
     decimalsOfSecondPair: 6
   }
 }
+
+export const assets = {
+  'Ehie5xYpeN8op1Cctc6aGUrqx8jq3jtf1DSjXDbfm7aT': {name: 'swop', decimals: 8},
+  'DG2xFkPdDwKUoBkzGAhQtLpSGzfXLiCYPEzeKH2Ad24p': {name: 'usdn', decimals: 6},
+  '6XtHjpXbs9RRJP2Sr9GUyVqzACcby9TkThHXnjVC5CDJ': {name: 'usdc', decimals: 6},
+  '34N9YcEETLWn93qYQ64EsP1x89tSruJU44RrEMSXXEPJ': {name: 'usdt', decimals: 6},
+  '9AT2kEi8C4AYxV1qKxtQTVpD5i54jCPvaNNRP6VzRtYZ': {name: 'usdlp', decimals: 6},
+  '8LQW8f7P5d5PZM7GtZEBgaqRPGSzS3DfPuiXrURJ4AJS': {name: 'btc', decimals: 8},
+  '474jTeYx2r2Va35794tCScAXWJG9hU2HcgxzMowaZUnu': {name: 'eth', decimals: 8},
+  '6nSpVyNH7yM69eg446wrQR94ipbbcmZMU1ENPwanC97g': {name: 'nsbt', decimals: 6},
+  'DUk2YTxhRoAqMJLus4G2b3fR8hMHVh6eiyFx5r29VR6t': {name: 'eurn', decimals: 6},
+  '4LHHvYGNKJUg5hj65aGD5vgScvCBmLpdRFtjokvCjSL8': {name: 'west', decimals: 8},
+  'DHgwrRvVyqJsepd32YbBqUeDH4GJ1N984X8QoekjgH8J': {name: 'wct', decimals: 2}
+};

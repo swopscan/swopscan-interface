@@ -4,6 +4,8 @@ import { Info as InfoSVG } from 'react-feather';
 import { PoolDataContext } from '../../App';
 import * as images from '../../assets/images';
 
+import GovernanceTreasury from './GovernanceTreasury';
+
 
 const StyledHomeScreen = styled.main`
   grid-area: content;
@@ -222,6 +224,8 @@ function HomeScreen() {
           })
         }
       </AllAssets>
+
+      <GovernanceTreasury />
     </StyledHomeScreen>
   )
 }
