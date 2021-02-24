@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { WalletPoolDetail } from './WalletPoolDetail';
 import { WalletOptions } from './WalletOptions';
-import { SwopDetail } from './SwopDetail';
+import { WalletSummary } from './WalletSummary';
 import { FetchWalletData } from '../../helpers/FetchWalletData';
 import { loading as loadingIMG } from '../../assets/images';
 
@@ -22,7 +22,7 @@ function Wallet({walletAddress}) {
             (
               <>
                 <WalletOptions showProvided={showProvided} setShowProvided={setShowProvided} />              
-                {Object.is(balances[0].stakedSwop, 0) ? null : <SwopDetail stakedSwop={balances[0]} /> }             
+                <WalletSummary stakedSwop={balances[0]} balances={balances} />           
                 {balances.slice(1).map((balance) => (
                   (Object.is(balance.walletBalance, 0) && showProvided) ? 
                     null : 
