@@ -167,7 +167,7 @@ function HomeScreen() {
       <aside>
         <StyledInfo>
           <Info />
-          swopscan, currently tracks 12 of 12 swop.fi liquidity pools.
+          swopscan, currently tracks 13 of 13 swop.fi liquidity pools.
         </StyledInfo>
       </aside>
 

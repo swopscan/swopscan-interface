@@ -8,6 +8,7 @@ export const poolAssets = {
   ['USDT - USDN']: {address: 'BNQ8bxyiWvfHzHAtNyfc6E7v3sSHXKq8yuit6Fnz1A3Q', decimals: 6, name: 'sUSDT_USD-N', pool: '3PPH7x7iqobW5ziyiRCic19rQqKr6nPYaK1'},
   ['ETH - USDN']: {address: 'H8wRVSgq82j6YU1K7jXVpDXHpd5m91t3bmCzRR7uFGc7', decimals: 7, name: 'sWETH_USD-N', pool: '3PNEC4YKqZiMMytFrYRVtpW2ujvi3aGXRPm'},
   ['NSBT - USDN']: {address: 'HWFcdC9wjPJY1udkR2UsfXzyPptzBb9m6df8qUW6LNLo', decimals: 6, name: 'sNSBT_USD-N', pool: '3P2V63Xd6BviDkeMzxhUw2SJyojByRz8a8m'},
+  ['USDCLP - USDN']: {address: '6SpiJVpk2zmCqZ5yjxarGaHb7CAQEWFvZsKDZktFvfMq', decimals: 6, name: 'sUSDCLP_USD-N', pool: '3PNr615DPhHpCJSq1atHYKKnoauWGHsYWBP'},
   ['USDLP - USDN']: {address: '9Pm2c97VzGSK6p8XGMCFABs575K9Cb35GdKtzwVA59m9', decimals: 6, name: 'sUSDLP_USD-N', pool: '3PDWi8hjQJjXhyTpeaiEYfFKWBd1iC4udfF'},
   ['WAVES - BTC']: {address: '2DiiWi3RLuTYBj81iwACCSayD9d1aY2ucfoJUBDHiqH8', decimals: 8, name: 'sWAVES_WBTC', pool: '3P8FVZgAJUAq32UEZtTw84qS4zLqEREiEiP'},
   ['WEST - USDN']: {address: '8g1Ki9cvjjhLUTyNwd4MaZ4fNfNTVc92Cb6f8My4qb1A', decimals: 7, name: 'sWEST_USD-N', pool: '3P6DLdJTP2EySq9MFdJu6beUevrQd2sVVBh'},
@@ -79,6 +80,15 @@ export const pools = {
     decimalsOfFirstPair: 6, 
     decimalsOfSecondPair: 6
   },
+  ['USDCLP - USDN']: {
+    poolAddress: '3PNr615DPhHpCJSq1atHYKKnoauWGHsYWBP', 
+    firstOfPair: 'USDCLP', 
+    secondOfPair: 'USDN', 
+    firstOfPairAddress: 'CrjhbC9gRezwvBZ1XwPQqRwx4BWzoyMHGFNUVdn22ep6', 
+    secondOfPairAddress: 'DG2xFkPdDwKUoBkzGAhQtLpSGzfXLiCYPEzeKH2Ad24p', 
+    decimalsOfFirstPair: 6, 
+    decimalsOfSecondPair: 6
+  },
   ['USDLP - USDN']: {
     poolAddress: '3PDWi8hjQJjXhyTpeaiEYfFKWBd1iC4udfF', 
     firstOfPair: 'USDLP', 
@@ -131,6 +141,7 @@ export const assets = {
   'DG2xFkPdDwKUoBkzGAhQtLpSGzfXLiCYPEzeKH2Ad24p': {name: 'usdn', decimals: 6},
   '6XtHjpXbs9RRJP2Sr9GUyVqzACcby9TkThHXnjVC5CDJ': {name: 'usdc', decimals: 6},
   '34N9YcEETLWn93qYQ64EsP1x89tSruJU44RrEMSXXEPJ': {name: 'usdt', decimals: 6},
+  'CrjhbC9gRezwvBZ1XwPQqRwx4BWzoyMHGFNUVdn22ep6': {name: 'usdclp', decimals: 6},
   '9AT2kEi8C4AYxV1qKxtQTVpD5i54jCPvaNNRP6VzRtYZ': {name: 'usdlp', decimals: 6},
   '8LQW8f7P5d5PZM7GtZEBgaqRPGSzS3DfPuiXrURJ4AJS': {name: 'btc', decimals: 8},
   '474jTeYx2r2Va35794tCScAXWJG9hU2HcgxzMowaZUnu': {name: 'eth', decimals: 8},

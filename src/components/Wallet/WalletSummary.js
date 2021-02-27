@@ -64,7 +64,7 @@ function WalletSummary({balances, stakedSwop}) {
     labels: [],
     datasets: [
       {
-        label: '# of Votes',
+        label: 'SWOP Interaction',
         data: [],
         backgroundColor: [],
         borderColor: [],
@@ -86,6 +86,7 @@ function WalletSummary({balances, stakedSwop}) {
     'rgba(30, 60, 70, 0.6)',
     'rgba(113, 252, 95, 0.6)',
     'rgba(119, 119, 119, 0.6)',
+    'rgba(103, 132, 245, 0.6)',
   ];
   const borderColors = [
     'rgb(255, 99, 132)',
@@ -100,6 +101,7 @@ function WalletSummary({balances, stakedSwop}) {
     'rgb(30, 60, 70)',
     'rgb(113, 252, 95)',
     'rgb(119, 119, 119)',
+    'rgb(103, 132, 245)'
   ];
   let colorIndex = 0;
 
